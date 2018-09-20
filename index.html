@@ -5,8 +5,20 @@
     </head>
     <body>
         <h1>LSB Temperatures</h1>
+        <div id="first-type">
+            <h3> Type of Data to Display: </h3>
+            <select id="types"></select>
+    				<!-- <input id="typesinput" list="datatype">
+    				<datalist id="types"></datalist> -->
+    				<!-- <button id="select"> Select </button> -->
 
-        <svg class="bar-chart"></svg>
+    				<!-- <span class="loading" id="loadingnames">
+    				 <img src="https://webster.cs.washington.edu/images/babynames/loading.gif" alt="icon" />
+    					Loading...
+    				 </span> -->
+
+        </div>
+        <svg class="line-chart"></svg>
 
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
