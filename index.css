@@ -5,38 +5,72 @@
 .bar {
      fill: #115D8C;
      }
-
-/* .typesinput {
-   background-color: #4CAF50;
-   color: white;
-   padding: 16px;
-   font-size: 16px;
-   border: none;
+/* .slider {
+    width: 600px;
+    height: 30px;
 }
 
-.first-type {
-   position: relative;
-   display: inline-block;
+.ticks {
+  font-size: 5pt;
 }
 
-.types {
-   display: none;
-   position: absolute;
-   background-color: #f1f1f1;
-   min-width: 160px;
-   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-   z-index: 1;
+rect {
+  fill: rgb(255, 218, 185);
 }
 
-.types option {
-   color: black;
-   padding: 12px 16px;
-   text-decoration: none;
-   display: block;
+.track {
+  stroke: rgb(211,211,211);
+  stroke-width: 20px;
+
 }
 
-.types option:hover {background-color: #ddd;}
+.sel-range {
+  stroke: rgba(255, 0, 0, 0.5);
+  stroke-width: 20px;
+} */
 
-.dropdown:hover .types {display: block;}
 
-.dropdown:hover .typesinput {background-color: #3e8e41;} */
+
+
+.slider-holder{
+  width: 700px;
+}
+.ticks {
+  font: 5pt sans-serif;
+}
+
+.track,
+.track-inset,
+.track-overlay {
+  stroke-linecap: round;
+}
+
+.track {
+  stroke: rgb(211,211,211);
+  stroke-width: 10px;
+}
+
+.track-overlay {
+  pointer-events: stroke;
+  stroke-width: 10px;
+  cursor: crosshair;
+}
+
+.sel-range{
+  stroke: #9CCC65;
+  stroke-width: 8px;
+}
+
+.handle {
+  fill: rgb(255, 218, 185);
+  stroke: #000;
+  stroke-opacity: 0.5;
+  stroke-width: 1px;
+  cursor: pointer;
+}
+.handle:hover{
+	fill: #f9a777;
+}
+.handle.active {
+  fill: #ff833a;
+}
