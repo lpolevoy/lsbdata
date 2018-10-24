@@ -104,7 +104,7 @@ function parseData(dataType) {
         // }
 
         // filter through stTemps and only push into arr needed data points (within slider date range)
-        console.log(new Date(i).getMonth());
+        // console.log(new Date(i).getMonth());
         arr.push({
             date: new Date(i), //date ('key')
             value: dataType[i]
