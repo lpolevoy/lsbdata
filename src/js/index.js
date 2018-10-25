@@ -1,10 +1,12 @@
 import Vue from 'vue';
 import Graph from './components/Graph.vue';
+import Slider from './components/Slider.vue';
 
 new Vue({
     el: '#app',
     components: {
-        Graph
+        Graph,
+        Slider
     }
 })
 

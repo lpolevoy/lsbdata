@@ -1,6 +1,6 @@
 <template>
     <div>
-        <select v-model="dataType" @change="updateChart">
+        <select class="d-block" v-model="dataType" @change="updateChart">
             <option v-for="type in dataTypes" :value="type">{{ type.text }}</option>
         </select>
         <svg class="line-chart"></svg>

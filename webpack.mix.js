@@ -13,7 +13,7 @@ let mix = require('laravel-mix');
 
  // must set public path for standalone (i.e. non Laravel projects) or compiling
  // will get stuck at emitting
-mix.js('src/index.js', 'public/').setPublicPath('public');//sass('src/app.scss', 'dist/');
+mix.js('src/js/index.js', 'public/').sass('src/sass/app.scss', 'public/').setPublicPath('public');//;
 
 // Full API
 // mix.js(src, output);
