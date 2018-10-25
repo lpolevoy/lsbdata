@@ -10107,17 +10107,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Graph_vue__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Graph_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Graph_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Slider_vue__ = __webpack_require__(525);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Slider_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Slider_vue__);
 
 
-
+// import Slider from './components/Slider.vue';
 
 new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
     components: {
-        Graph: __WEBPACK_IMPORTED_MODULE_1__components_Graph_vue___default.a,
-        Slider: __WEBPACK_IMPORTED_MODULE_2__components_Slider_vue___default.a
+        Graph: __WEBPACK_IMPORTED_MODULE_1__components_Graph_vue___default.a
+        // Slider
     }
 });
 
@@ -21596,7 +21594,7 @@ var normalizeComponent = __webpack_require__(93)
 /* script */
 var __vue_script__ = __webpack_require__(188)
 /* template */
-var __vue_template__ = __webpack_require__(524)
+var __vue_template__ = __webpack_require__(530)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -21669,7 +21667,7 @@ exports = module.exports = __webpack_require__(91)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -21714,6 +21712,8 @@ module.exports = function listToStyles (parentId, list) {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Slider_vue__ = __webpack_require__(524);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Slider_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Slider_vue__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -21725,8 +21725,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
  // can be more specific
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         var _fahrenheit;
@@ -21749,7 +21752,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     "2018-12-01 00:00:00": 5.154, "2018-12-02 00:00:00": 5.250, "2018-12-03 00:00:00": 6.127, "2018-12-04 00:00:00": 5.720, "2018-12-05 00:00:00": 6.320, "2018-12-06 00:00:00": 5.506, "2018-12-07 00:00:00": 5.252, "2018-12-08 00:00:00": 5.158, "2018-12-09 00:00:00": 4.897, "2018-12-10 00:00:00": 4.353, "2018-12-11 00:00:00": 3.947, "2018-12-12 00:00:00": 3.240
                 },
                 "fahrenheit": (_fahrenheit = {
-                    "2018-01-02": 4.00, "2018-01-03": 0.00, "2018-01-04": 3.00, "2018-01-05": 6.00, "2018-01-07": 4.64 }, _defineProperty(_fahrenheit, "2018-01-07", 3.25), _defineProperty(_fahrenheit, "2018-01-08", 2.42), _defineProperty(_fahrenheit, "2018-01-09", 1.15), _defineProperty(_fahrenheit, "2018-01-10", 1.57), _defineProperty(_fahrenheit, "2018-01-11", 1.27), _defineProperty(_fahrenheit, "2018-01-12", 2.0), _defineProperty(_fahrenheit, "2018-01-13", 2.78), _defineProperty(_fahrenheit, "2018-01-14", 3.2), _defineProperty(_fahrenheit, "2018-01-15", 4.01), _defineProperty(_fahrenheit, "2018-01-16", 3.35), _defineProperty(_fahrenheit, "2018-01-17", 2.56), _defineProperty(_fahrenheit, "2018-01-18", 4.98), _defineProperty(_fahrenheit, "2018-01-19", 5.8), _defineProperty(_fahrenheit, "2018-01-20", 5.9), _defineProperty(_fahrenheit, "2018-01-21", 5.78), _defineProperty(_fahrenheit, "2018-01-22", 5.95), _defineProperty(_fahrenheit, "2018-01-23", 5.4), _defineProperty(_fahrenheit, "2018-01-24", 4.83), _defineProperty(_fahrenheit, "2018-01-25", 4.15), _defineProperty(_fahrenheit, "2018-01-26", 4.44), _defineProperty(_fahrenheit, "2018-01-27", 3.9), _defineProperty(_fahrenheit, "2018-01-28", 3.33), _defineProperty(_fahrenheit, "2018-01-29", 2.789), _defineProperty(_fahrenheit, "2018-01-30", 2.99), _defineProperty(_fahrenheit, "2018-01-31", 3.79), _fahrenheit)
+                    "2018-01-02": 4.00, "2018-01-03": 0.00, "2018-01-04": 3.00, "2018-01-05": 6.00, "2018-01-07": 4.64 }, _defineProperty(_fahrenheit, '2018-01-07', 3.25), _defineProperty(_fahrenheit, "2018-01-08", 2.42), _defineProperty(_fahrenheit, "2018-01-09", 1.15), _defineProperty(_fahrenheit, "2018-01-10", 1.57), _defineProperty(_fahrenheit, "2018-01-11", 1.27), _defineProperty(_fahrenheit, "2018-01-12", 2.0), _defineProperty(_fahrenheit, "2018-01-13", 2.78), _defineProperty(_fahrenheit, "2018-01-14", 3.2), _defineProperty(_fahrenheit, "2018-01-15", 4.01), _defineProperty(_fahrenheit, "2018-01-16", 3.35), _defineProperty(_fahrenheit, "2018-01-17", 2.56), _defineProperty(_fahrenheit, "2018-01-18", 4.98), _defineProperty(_fahrenheit, "2018-01-19", 5.8), _defineProperty(_fahrenheit, "2018-01-20", 5.9), _defineProperty(_fahrenheit, "2018-01-21", 5.78), _defineProperty(_fahrenheit, "2018-01-22", 5.95), _defineProperty(_fahrenheit, "2018-01-23", 5.4), _defineProperty(_fahrenheit, "2018-01-24", 4.83), _defineProperty(_fahrenheit, "2018-01-25", 4.15), _defineProperty(_fahrenheit, "2018-01-26", 4.44), _defineProperty(_fahrenheit, "2018-01-27", 3.9), _defineProperty(_fahrenheit, "2018-01-28", 3.33), _defineProperty(_fahrenheit, "2018-01-29", 2.789), _defineProperty(_fahrenheit, "2018-01-30", 2.99), _defineProperty(_fahrenheit, "2018-01-31", 3.79), _fahrenheit)
             },
             beginDate: new Date("January 1, 2018"),
             endDate: new Date("Dec 30, 2018"),
@@ -21853,6 +21856,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     mounted: function mounted() {
         this.drawChart();
+    },
+
+    components: {
+        Slider: __WEBPACK_IMPORTED_MODULE_1__Slider_vue___default.a
     }
 });
 
@@ -36173,76 +36180,16 @@ function nopropagation() {
 /* 524 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "select",
-      {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.dataType,
-            expression: "dataType"
-          }
-        ],
-        staticClass: "d-block",
-        on: {
-          change: [
-            function($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function(o) {
-                  return o.selected
-                })
-                .map(function(o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.dataType = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
-            },
-            _vm.updateChart
-          ]
-        }
-      },
-      _vm._l(_vm.dataTypes, function(type) {
-        return _c("option", { domProps: { value: type } }, [
-          _vm._v(_vm._s(type.text))
-        ])
-      })
-    ),
-    _vm._v(" "),
-    _c("svg", { staticClass: "line-chart" })
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-aaa4959c", module.exports)
-  }
-}
-
-/***/ }),
-/* 525 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(526)
+  __webpack_require__(525)
 }
 var normalizeComponent = __webpack_require__(93)
 /* script */
-var __vue_script__ = __webpack_require__(528)
+var __vue_script__ = __webpack_require__(527)
 /* template */
-var __vue_template__ = __webpack_require__(530)
+var __vue_template__ = __webpack_require__(529)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -36281,13 +36228,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 526 */
+/* 525 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(527);
+var content = __webpack_require__(526);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -36307,7 +36254,7 @@ if(false) {
 }
 
 /***/ }),
-/* 527 */
+/* 526 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(91)(false);
@@ -36315,19 +36262,19 @@ exports = module.exports = __webpack_require__(91)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 528 */
+/* 527 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__slider_js__ = __webpack_require__(529);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__slider_js__ = __webpack_require__(528);
 //
 //
 //
@@ -36339,8 +36286,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             value1: 0,
-            value2: 11,
-            sliderValues: [0, 11] // ??
+            value2: 11
         };
     },
 
@@ -36389,7 +36335,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 529 */
+/* 528 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -36500,7 +36446,7 @@ function updatedGraph(v1, v2) {
 
 
 /***/ }),
-/* 530 */
+/* 529 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -36516,6 +36462,72 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-679d442d", module.exports)
+  }
+}
+
+/***/ }),
+/* 530 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.dataType,
+              expression: "dataType"
+            }
+          ],
+          staticClass: "d-block",
+          on: {
+            change: [
+              function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.dataType = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              },
+              _vm.updateChart
+            ]
+          }
+        },
+        _vm._l(_vm.dataTypes, function(type) {
+          return _c("option", { domProps: { value: type } }, [
+            _vm._v(_vm._s(type.text))
+          ])
+        })
+      ),
+      _vm._v(" "),
+      _c("slider"),
+      _vm._v(" "),
+      _c("svg", { staticClass: "line-chart" })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-aaa4959c", module.exports)
   }
 }
 

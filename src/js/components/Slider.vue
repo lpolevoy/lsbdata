@@ -10,7 +10,6 @@
             return {
                 value1: 0,
                 value2: 11,
-                sliderValues: [0, 11], // ??
             };
         },
         methods: {

@@ -3,12 +3,15 @@
         <select class="d-block" v-model="dataType" @change="updateChart">
             <option v-for="type in dataTypes" :value="type">{{ type.text }}</option>
         </select>
+        <slider></slider>
         <svg class="line-chart"></svg>
     </div>
 </template>
 
 <script>
     import * as d3 from 'd3'; // can be more specific
+    import Slider from './Slider.vue'
+
     export default {
         data() {
             return {
@@ -150,6 +153,9 @@
         },
         mounted() {
             this.drawChart();
+        },
+        components: {
+            Slider
         }
     }
 </script>
