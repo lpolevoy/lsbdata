@@ -21139,7 +21139,7 @@ exports = module.exports = __webpack_require__(183)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -21642,15 +21642,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             },
             beginDate: new Date("January 1, 2018"),
             endDate: new Date("Dec 30, 2018"),
-            dataTypes: [{ text: '"Temperature (\xB0C)"', value: 'celcius' }, { text: '"Temperature (\xB0F)"', value: 'fahrenheit' }, { text: '"Temperature (K)"', value: 'kelvin' }, { text: 'Humidity (%)', value: 'humidity' }],
-            dataType: 'celcius'
+            dataTypes: [{ text: "Temperature (\xB0C)", value: 'celcius' }, { text: "Temperature (\xB0F)", value: 'fahrenheit' }, { text: 'Temperature (K)', value: 'kelvin' }, { text: 'Humidity (%)', value: 'humidity' }],
+            dataType: { text: "Temperature (\xB0C)", value: 'celcius' }
         };
     },
 
     computed: {
         data: function data() {
             // not quite right
-            return this.stTemps[this.dataType];
+            return this.stTemps[this.dataType.value];
         }
     },
     methods: {
@@ -21728,7 +21728,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             .attr("transform", "rotate(-90)") // rotates label 90 degrees CC-wise
             .attr("y", 6) // y position of label
             .attr("dy", "0.71em").attr("text-anchor", "end") // aligns text at end of text tag
-            .text("Temperature(\xB0C)"); // text inside text tag -> needs to be made more reactive
+            .text(this.dataType.text); // text inside text tag -> needs to be made more reactive
 
             //svg.selectAll('tick')
 
@@ -21736,7 +21736,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             g.append("path").datum(data).attr("fill", "none").attr("stroke", "steelblue").attr("stroke-linejoin", "round").attr("stroke-linecap", "round").attr("stroke-width", 1.5).attr("x", 10).attr("d", line); // based on variable defined above, appends line for every data element
         },
         updateChart: function updateChart() {
-            console.log("updating");
             this.clearChart();
             this.drawChart();
         }
@@ -36204,7 +36203,7 @@ var render = function() {
         }
       },
       _vm._l(_vm.dataTypes, function(type) {
-        return _c("option", { domProps: { value: type.value } }, [
+        return _c("option", { domProps: { value: type } }, [
           _vm._v(_vm._s(type.text))
         ])
       })

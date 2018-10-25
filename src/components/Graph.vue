@@ -1,7 +1,7 @@
 <template>
     <div>
         <select v-model="dataType" @change="updateChart">
-            <option v-for="type in dataTypes" :value="type.value">{{ type.text }}</option>
+            <option v-for="type in dataTypes" :value="type">{{ type.text }}</option>
         </select>
         <svg class="line-chart"></svg>
     </div>
@@ -37,18 +37,18 @@
                 beginDate: new Date("January 1, 2018"),
                 endDate: new Date("Dec 30, 2018"),
                 dataTypes: [
-                    {text: '"Temperature (\xB0C)"', value: 'celcius'},
-                    {text: '"Temperature (\xB0F)"', value: 'fahrenheit'},
-                    {text: '"Temperature (K)"', value: 'kelvin'},
+                    {text: "Temperature (\xB0C)", value: 'celcius'},
+                    {text: "Temperature (\xB0F)", value: 'fahrenheit'},
+                    {text: 'Temperature (K)', value: 'kelvin'},
                     {text: 'Humidity (%)', value: 'humidity'}
                 ],
-                dataType: 'celcius'
+                dataType: {text: "Temperature (\xB0C)", value: 'celcius'}
             };
         },
         computed: {
             data() {
                 // not quite right
-                return this.stTemps[this.dataType];
+                return this.stTemps[this.dataType.value];
             }
         },
         methods: {
@@ -128,7 +128,7 @@
                         .attr("y", 6) // y position of label
                         .attr("dy", "0.71em")
                         .attr("text-anchor", "end") // aligns text at end of text tag
-                        .text("Temperature(\xB0C)"); // text inside text tag -> needs to be made more reactive
+                        .text(this.dataType.text); // text inside text tag
 
                     //svg.selectAll('tick')
 
