@@ -10107,9 +10107,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Graph_vue__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Graph_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Graph_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Slider_vue__ = __webpack_require__(525);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Slider_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Slider_vue__);
 
 
-// import Slider from './components/Slider.vue';
+
 
 window.sliderValues = {};
 window.x = {}; //null;
@@ -10123,8 +10125,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.$bus = window.bus;
 new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
     components: {
-        Graph: __WEBPACK_IMPORTED_MODULE_1__components_Graph_vue___default.a
-        // Slider
+        Graph: __WEBPACK_IMPORTED_MODULE_1__components_Graph_vue___default.a,
+        Slider: __WEBPACK_IMPORTED_MODULE_2__components_Slider_vue___default.a
     }
 });
 
@@ -21603,7 +21605,7 @@ var normalizeComponent = __webpack_require__(93)
 /* script */
 var __vue_script__ = __webpack_require__(188)
 /* template */
-var __vue_template__ = __webpack_require__(530)
+var __vue_template__ = __webpack_require__(524)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -21721,8 +21723,6 @@ module.exports = function listToStyles (parentId, list) {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Slider_vue__ = __webpack_require__(524);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Slider_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Slider_vue__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -21737,7 +21737,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
  // can be more specific
-
+// import Slider from './Slider.vue'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['svgid'],
@@ -21883,17 +21883,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var _this2 = this;
 
         // console.log(this.id);
-        this.$bus.$on(this.svgid + '-slider-update', function (v1, v2) {
+        this.$bus.$on('slider-update', function (v1, v2) {
             var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             _this2.beginDate = new Date(months[v1] + ' 1, 2018');
             _this2.endDate = new Date(months[v2] + ' 1, 2018');
             _this2.clearChart();
             _this2.drawChart();
         });
-    },
-
-    components: {
-        Slider: __WEBPACK_IMPORTED_MODULE_1__Slider_vue___default.a
     }
 });
 
@@ -36214,16 +36210,76 @@ function nopropagation() {
 /* 524 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "select",
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.dataType,
+            expression: "dataType"
+          }
+        ],
+        staticClass: "d-block",
+        on: {
+          change: [
+            function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.dataType = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            },
+            _vm.updateChart
+          ]
+        }
+      },
+      _vm._l(_vm.dataTypes, function(type) {
+        return _c("option", { domProps: { value: type } }, [
+          _vm._v(_vm._s(type.text))
+        ])
+      })
+    ),
+    _vm._v(" "),
+    _c("svg", { staticClass: "line-chart", attrs: { id: _vm.svgid } })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-aaa4959c", module.exports)
+  }
+}
+
+/***/ }),
+/* 525 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(525)
+  __webpack_require__(526)
 }
 var normalizeComponent = __webpack_require__(93)
 /* script */
-var __vue_script__ = __webpack_require__(527)
+var __vue_script__ = __webpack_require__(528)
 /* template */
-var __vue_template__ = __webpack_require__(529)
+var __vue_template__ = __webpack_require__(530)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -36262,13 +36318,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 525 */
+/* 526 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(526);
+var content = __webpack_require__(527);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -36288,7 +36344,7 @@ if(false) {
 }
 
 /***/ }),
-/* 526 */
+/* 527 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(91)(false);
@@ -36296,19 +36352,19 @@ exports = module.exports = __webpack_require__(91)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 527 */
+/* 528 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__slider_js__ = __webpack_require__(528);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__slider_js__ = __webpack_require__(529);
 //
 //
 //
@@ -36317,7 +36373,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['id'],
+    // props: ['id'],
     data: function data() {
         return {
             value1: 0,
@@ -36333,16 +36389,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
-        var _this = this;
-
         var sliderValues = [0, 11];
-        window.sliderValues[this.id] = sliderValues;
+        // window.sliderValues[this.id] = sliderValues;
+        window.sliderValues = sliderValues;
         var width = 570;
-        var svg = __WEBPACK_IMPORTED_MODULE_0_d3__["i" /* select */]('#' + this.id).append('svg').attr('width', width + 30).attr('height', 50);
+        var svg = // d3.select(`#${this.id}`).append('svg')
+        __WEBPACK_IMPORTED_MODULE_0_d3__["i" /* select */]('div.slider-container').append('svg').attr('width', width + 30).attr('height', 50);
         var x = __WEBPACK_IMPORTED_MODULE_0_d3__["g" /* scaleLinear */]().domain([0, 11]).range([0, width]).clamp(true);
 
-        // window.x = x;
-        window.x[this.id] = x;
+        window.x = x;
+        // window.x[this.id] = x;
 
         var xMin = x(0); // sets left boundary of slider
         window.xMin = xMin;
@@ -36355,7 +36411,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         var selRange = slider.append('line').attr('class', 'sel-range').attr('x1', 10 + x(sliderValues[0])).attr('x2', 10 + x(sliderValues[1]));
 
-        window.selRange[this.id] = selRange;
+        // window.selRange[this.id] = selRange;
+        window.selRange = selRange;
 
         var ticksArr = ["Jan '18", "Feb '18", "Mar '18", "Apr '18", "May '18", "Jun '18", "Jul '18", "Aug '18", "Sep '18", "Oct '18", "Nov '18", "Dec '18"];
 
@@ -36367,9 +36424,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return ticksArr[i];
         }); // sets text of each text
 
-        var handle = slider.selectAll('rect').data([0, 1]).enter().append('rect', '.track-overlay').attr('class', 'handle').attr('id', function (d) {
-            return _this.id + '-handle-' + d;
-        }).attr('y', -8) // handles at -8 y position
+        var handle = slider.selectAll('rect').data([0, 1]).enter().append('rect', '.track-overlay').attr('class', 'handle')
+        // .attr('id', d => `${this.id}-handle-${d}`)
+        .attr('y', -8) // handles at -8 y position
         .attr('x', function (d) {
             return x(sliderValues[d]);
         }) // puts handles at value1 and value 2 x position
@@ -36379,7 +36436,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 528 */
+/* 529 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -36477,15 +36534,15 @@ function drag(d) {
         x1 = window.xMin;
     }
 
-    var id = __WEBPACK_IMPORTED_MODULE_0_d3__["i" /* select */](this).attr('id');
-    var index = id.lastIndexOf('-handle-');
-    var key = id.substring(0, index);
-    console.log(key);
+    // let id = d3.select(this).attr('id');
+    // let index = id.lastIndexOf('-handle-');
+    // let key = id.substring(0, index);
+    // console.log(key);
 
     __WEBPACK_IMPORTED_MODULE_0_d3__["i" /* select */](this).attr("x", x1); //
-    var x2 = window.x[key](window.sliderValues[key][d == 0 ? 1 : 0]);
+    var x2 = window.x(window.sliderValues[d == 0 ? 1 : 0]);
 
-    window.selRange[key].attr("x1", 10 + x1) // places handles inspect
+    window.selRange.attr("x1", 10 + x1) // places handles inspect
     .attr("x2", 10 + x2);
 
     // console.log("Dragging!");
@@ -36493,15 +36550,15 @@ function drag(d) {
 
 function endDrag(d) {
     var elem = __WEBPACK_IMPORTED_MODULE_0_d3__["i" /* select */](this);
-    var id = elem.attr('id');
-    var index = id.lastIndexOf('-handle-');
-    var key = id.substring(0, index);
+    // let id = elem.attr('id');
+    // let index = id.lastIndexOf('-handle-');
+    // let key = id.substring(0, index);
 
-    var v = Math.round(window.x[key].invert(__WEBPACK_IMPORTED_MODULE_0_d3__["d" /* event */].x));
+    var v = Math.round(window.x.invert(__WEBPACK_IMPORTED_MODULE_0_d3__["d" /* event */].x));
     // console.log(this);
-    window.sliderValues[key][d] = v;
-    var v1 = Math.min(window.sliderValues[key][0], window.sliderValues[key][1]),
-        v2 = Math.max(window.sliderValues[key][0], window.sliderValues[key][1]);
+    window.sliderValues[d] = v;
+    var v1 = Math.min(window.sliderValues[0], window.sliderValues[1]),
+        v2 = Math.max(window.sliderValues[0], window.sliderValues[1]);
 
     // h1 = v1;
     // h2 = v2;
@@ -36509,11 +36566,11 @@ function endDrag(d) {
     // console.log(v1 + " " + h1);
     // console.log(v2 + " " + h2);
 
-    elem.classed("active", false).attr("x", window.x[key](v));
+    elem.classed("active", false).attr("x", window.x(v));
 
-    window.selRange[key].attr("x1", 10 + window.x[key](v1)).attr("x2", 10 + window.x[key](v2));
+    window.selRange.attr("x1", 10 + window.x(v1)).attr("x2", 10 + window.x(v2));
 
-    window.bus.$emit(key + '-update', v1, v2);
+    window.bus.$emit('slider-update', v1, v2);
     // console.log("Ended dragging!");
     // updateGraph(v1, v2);
     // updatedGraph(v1, v2);
@@ -36531,14 +36588,14 @@ function endDrag(d) {
 
 
 /***/ }),
-/* 529 */
+/* 530 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "slider-container", attrs: { id: _vm.id } })
+  return _c("div", { staticClass: "slider-container" })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -36547,72 +36604,6 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-679d442d", module.exports)
-  }
-}
-
-/***/ }),
-/* 530 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "select",
-        {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.dataType,
-              expression: "dataType"
-            }
-          ],
-          staticClass: "d-block",
-          on: {
-            change: [
-              function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.dataType = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              },
-              _vm.updateChart
-            ]
-          }
-        },
-        _vm._l(_vm.dataTypes, function(type) {
-          return _c("option", { domProps: { value: type } }, [
-            _vm._v(_vm._s(type.text))
-          ])
-        })
-      ),
-      _vm._v(" "),
-      _c("slider", { attrs: { id: _vm.svgid + "-slider" } }),
-      _vm._v(" "),
-      _c("svg", { staticClass: "line-chart", attrs: { id: _vm.svgid } })
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-aaa4959c", module.exports)
   }
 }
 

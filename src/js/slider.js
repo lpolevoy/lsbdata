@@ -88,15 +88,15 @@ function drag(d) {
         x1 = window.xMin;
     }
 
-    let id = d3.select(this).attr('id');
-    let index = id.lastIndexOf('-handle-');
-    let key = id.substring(0, index);
-    console.log(key);
+    // let id = d3.select(this).attr('id');
+    // let index = id.lastIndexOf('-handle-');
+    // let key = id.substring(0, index);
+    // console.log(key);
 
     d3.select(this).attr("x", x1); //
-    var x2 = window.x[key](window.sliderValues[key][d==0 ? 1:0]);
+    var x2 = window.x(window.sliderValues[d==0 ? 1:0]);
 
-    window.selRange[key]
+    window.selRange
       .attr("x1", 10 + x1) // places handles inspect
       .attr("x2", 10 + x2)
 
@@ -106,15 +106,15 @@ function drag(d) {
 
 function endDrag(d){
     var elem = d3.select(this);
-    let id = elem.attr('id');
-    let index = id.lastIndexOf('-handle-');
-    let key = id.substring(0, index);
+    // let id = elem.attr('id');
+    // let index = id.lastIndexOf('-handle-');
+    // let key = id.substring(0, index);
 
-    var v = Math.round(window.x[key].invert(d3.event.x));
+    var v = Math.round(window.x.invert(d3.event.x));
         // console.log(this);
-    window.sliderValues[key][d] = v;
-    var v1 = Math.min(window.sliderValues[key][0], window.sliderValues[key][1]),
-        v2 = Math.max(window.sliderValues[key][0], window.sliderValues[key][1]);
+    window.sliderValues[d] = v;
+    var v1 = Math.min(window.sliderValues[0], window.sliderValues[1]),
+        v2 = Math.max(window.sliderValues[0], window.sliderValues[1]);
 
         // h1 = v1;
         // h2 = v2;
@@ -123,13 +123,13 @@ function endDrag(d){
     // console.log(v2 + " " + h2);
 
     elem.classed("active", false)
-        .attr("x", window.x[key](v));
+        .attr("x", window.x(v));
 
-    window.selRange[key]
-      .attr("x1", 10 + window.x[key](v1))
-      .attr("x2", 10 + window.x[key](v2));
+    window.selRange
+      .attr("x1", 10 + window.x(v1))
+      .attr("x2", 10 + window.x(v2));
 
-    window.bus.$emit(`${key}-update`, v1, v2);
+    window.bus.$emit('slider-update', v1, v2);
     // console.log("Ended dragging!");
     // updateGraph(v1, v2);
     // updatedGraph(v1, v2);

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Graph from './components/Graph.vue';
-// import Slider from './components/Slider.vue';
+import Slider from './components/Slider.vue';
 
 window.sliderValues = {};
 window.x = {}; //null;
@@ -15,7 +15,7 @@ new Vue({
     el: '#app',
     components: {
         Graph,
-        // Slider
+        Slider
     }
 })
 

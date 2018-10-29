@@ -3,14 +3,14 @@
         <select class="d-block" v-model="dataType" @change="updateChart">
             <option v-for="type in dataTypes" :value="type">{{ type.text }}</option>
         </select>
-        <slider :id="svgid + '-slider'"></slider>
+        <!-- <slider :id="svgid + '-slider'"></slider> -->
         <svg :id="svgid" class="line-chart"></svg>
     </div>
 </template>
 
 <script>
     import * as d3 from 'd3'; // can be more specific
-    import Slider from './Slider.vue'
+    // import Slider from './Slider.vue'
 
     export default {
         props: ['svgid'],
@@ -165,7 +165,7 @@
         },
         created() {
             // console.log(this.id);
-            this.$bus.$on(`${this.svgid}-slider-update`, (v1, v2) => {
+            this.$bus.$on('slider-update', (v1, v2) => {
                 let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
                 this.beginDate = new Date(`${months[v1]} 1, 2018`);
                 this.endDate = new Date(`${months[v2]} 1, 2018`);
@@ -173,9 +173,9 @@
                 this.drawChart();
             })
         },
-        components: {
-            Slider
-        }
+        // components: {
+        //     Slider
+        // }
     }
 </script>
 
