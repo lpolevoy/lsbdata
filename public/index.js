@@ -10111,6 +10111,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 // import Slider from './components/Slider.vue';
 
+window.sliderValues = [];
+window.x = null;
+window.selRange = null;
+window.xMin = 0;
+window.xMax = 11;
+
+window.bus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.$bus = window.bus;
+
 new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
     components: {
@@ -21667,7 +21676,7 @@ exports = module.exports = __webpack_require__(91)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -21762,9 +21771,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
 
     computed: {
-        data: function data() {
-            // not quite right
-            return this.stTemps[this.dataType.value];
+        filteredData: function filteredData() {
+            var _this = this;
+
+            console.log('update data');
+            // let range = [this.beginDate, this.endDate];
+            var arr = this.parseData(this.stTemps[this.dataType.value]);
+
+            console.log(window.xMin + " " + window.xMax);
+            // return arr.filter(date => date.date.getMonth() >= window.x(0) && date.date.getMonth() <= window.x(1));
+            return arr.filter(function (date) {
+                return date.date.getMonth() >= _this.beginDate.getMonth() && date.date.getMonth() <= _this.endDate.getMonth();
+            });
+
+            // return this.stTemps[this.dataType.value];
         }
     },
     methods: {
@@ -21785,7 +21805,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             __WEBPACK_IMPORTED_MODULE_0_d3__["i" /* select */]('svg.line-chart').selectAll('*').remove();
         },
         drawChart: function drawChart() {
-            var data = this.parseData(this.data);
+            // let data = this.parseData(this.data);
+            var data = this.filteredData;
 
             var svgWidth = 600,
                 svgHeight = 400;
@@ -21856,6 +21877,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     mounted: function mounted() {
         this.drawChart();
+    },
+    created: function created() {
+        var _this2 = this;
+
+        this.$bus.$on('slider-update', function (v1, v2) {
+            var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            _this2.beginDate = new Date(months[v1] + ' 1, 2018');
+            _this2.endDate = new Date(months[v2] + ' 1, 2018');
+            _this2.clearChart();
+            _this2.drawChart();
+        });
     },
 
     components: {
@@ -36352,6 +36384,8 @@ var sliderValues;
 var selRange;
 var ticksArr = [];
 
+var bus = window.bus;
+
 function setupSlider(value1, value2, updateGraph) {
     sliderValues = [value1, value2];
     var width = 570;
@@ -36391,19 +36425,22 @@ function updateGraph(value1, value2) {
 }
 
 function startDrag() {
+    var bus = window.bus;
+    // bus.$emit('ready');
     __WEBPACK_IMPORTED_MODULE_0_d3__["i" /* select */](this).raise().classed("active", true); // allows dragging to start by setting active class of slider to true
     // console.log("Started dragging!");
 }
 
 function drag(d) {
+
     var x1 = __WEBPACK_IMPORTED_MODULE_0_d3__["d" /* event */].x; // gets x value of moving handle
     // console.log(x1);
 
     // makes sure handle doesn't exceed slider boundaries
-    if (x1 > xMax) {
-        x1 = xMax;
-    } else if (x1 < xmin) {
-        x1 = xMin;
+    if (x1 > window.xMax) {
+        x1 = window.xMax;
+    } else if (x1 < window.xMin) {
+        x1 = window.xMin;
     }
     __WEBPACK_IMPORTED_MODULE_0_d3__["i" /* select */](this).attr("x", x1); //
     var x2 = window.x(window.sliderValues[d == 0 ? 1 : 0]);
@@ -36423,12 +36460,14 @@ function endDrag(d) {
     h1 = v1;
     h2 = v2;
 
-    console.log(v1 + " " + h1);
-    console.log(v2 + " " + h2);
+    // console.log(v1 + " " + h1);
+    // console.log(v2 + " " + h2);
 
     elem.classed("active", false).attr("x", window.x(v));
 
     window.selRange.attr("x1", 10 + window.x(v1)).attr("x2", 10 + window.x(v2));
+
+    window.bus.$emit('slider-update', v1, v2);
     // console.log("Ended dragging!");
     // updateGraph(v1, v2);
     // updatedGraph(v1, v2);

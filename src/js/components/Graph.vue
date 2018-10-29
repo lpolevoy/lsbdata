@@ -49,9 +49,16 @@
             };
         },
         computed: {
-            data() {
-                // not quite right
-                return this.stTemps[this.dataType.value];
+            filteredData() {
+                console.log('update data');
+                // let range = [this.beginDate, this.endDate];
+                let arr = this.parseData(this.stTemps[this.dataType.value]);
+
+                console.log(window.xMin + " " + window.xMax);
+                // return arr.filter(date => date.date.getMonth() >= window.x(0) && date.date.getMonth() <= window.x(1));
+                return arr.filter(date => date.date.getMonth() >= this.beginDate.getMonth() && date.date.getMonth() <= this.endDate.getMonth());
+
+                // return this.stTemps[this.dataType.value];
             }
         },
         methods: {
@@ -72,7 +79,8 @@
                 d3.select('svg.line-chart').selectAll('*').remove();
             },
             drawChart() {
-                let data = this.parseData(this.data);
+                // let data = this.parseData(this.data);
+                let data = this.filteredData;
 
                 var svgWidth = 600, svgHeight = 400;
                 var margin = { top: 20, right: 20, bottom: 30, left: 50 };
@@ -153,6 +161,15 @@
         },
         mounted() {
             this.drawChart();
+        },
+        created() {
+            this.$bus.$on('slider-update', (v1, v2) => {
+                let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+                this.beginDate = new Date(`${months[v1]} 1, 2018`);
+                this.endDate = new Date(`${months[v2]} 1, 2018`);
+                this.clearChart();
+                this.drawChart();
+            })
         },
         components: {
             Slider

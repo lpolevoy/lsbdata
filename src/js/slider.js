@@ -7,8 +7,10 @@ var sliderValues;
 var selRange;
 var ticksArr = [];
 
+var bus = window.bus;
+
 function setupSlider(value1, value2, updateGraph) {
-    sliderValues = [value1, value2];
+        sliderValues = [value1, value2];
     var  width = 570;
     var svg = d3.select('div.slider-container').append('svg')
                 .attr('width', width + 30)
@@ -68,19 +70,22 @@ function updateGraph(value1, value2) {
 }
 
 function startDrag() {
+    let bus = window.bus;
+    // bus.$emit('ready');
     d3.select(this).raise().classed("active", true); // allows dragging to start by setting active class of slider to true
     // console.log("Started dragging!");
 }
 
 function drag(d) {
+
     var x1 = d3.event.x; // gets x value of moving handle
     // console.log(x1);
 
     // makes sure handle doesn't exceed slider boundaries
-    if(x1 > xMax) {
-        x1 = xMax;
-    } else if (x1 < xmin) {
-        x1 = xMin;
+    if(x1 > window.xMax) {
+        x1 = window.xMax;
+    } else if (x1 < window.xMin) {
+        x1 = window.xMin;
     }
     d3.select(this).attr("x", x1); //
     var x2 = window.x(window.sliderValues[d==0 ? 1:0]);
@@ -101,8 +106,8 @@ function endDrag(d){
         h1 = v1;
         h2 = v2;
 
-    console.log(v1 + " " + h1);
-    console.log(v2 + " " + h2);
+    // console.log(v1 + " " + h1);
+    // console.log(v2 + " " + h2);
 
     elem.classed("active", false)
         .attr("x", window.x(v));
@@ -110,6 +115,8 @@ function endDrag(d){
     window.selRange
       .attr("x1", 10 + window.x(v1))
       .attr("x2", 10 + window.x(v2));
+
+    window.bus.$emit('slider-update', v1, v2);
     // console.log("Ended dragging!");
     // updateGraph(v1, v2);
     // updatedGraph(v1, v2);
