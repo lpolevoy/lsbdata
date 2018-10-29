@@ -10111,9 +10111,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 // import Slider from './components/Slider.vue';
 
-window.sliderValues = [];
-window.x = null;
-window.selRange = null;
+window.sliderValues = {};
+window.x = {}; //null;
+window.selRange = {}; //null;
 window.xMin = 0;
 window.xMax = 11;
 
@@ -21676,7 +21676,7 @@ exports = module.exports = __webpack_require__(91)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -21740,6 +21740,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['svgid'],
     data: function data() {
         var _fahrenheit;
 
@@ -21774,11 +21775,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         filteredData: function filteredData() {
             var _this = this;
 
-            console.log('update data');
+            // console.log('update data');
             // let range = [this.beginDate, this.endDate];
             var arr = this.parseData(this.stTemps[this.dataType.value]);
 
-            console.log(window.xMin + " " + window.xMax);
+            // console.log(window.xMin + " " + window.xMax);
             // return arr.filter(date => date.date.getMonth() >= window.x(0) && date.date.getMonth() <= window.x(1));
             return arr.filter(function (date) {
                 return date.date.getMonth() >= _this.beginDate.getMonth() && date.date.getMonth() <= _this.endDate.getMonth();
@@ -21802,7 +21803,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         },
         clearChart: function clearChart() {
             // rather than by class, may be better to select by id and have id be a prop (for multiple graphs)
-            __WEBPACK_IMPORTED_MODULE_0_d3__["i" /* select */]('svg.line-chart').selectAll('*').remove();
+            __WEBPACK_IMPORTED_MODULE_0_d3__["i" /* select */]('#' + this.svgid).selectAll('*').remove();
         },
         drawChart: function drawChart() {
             // let data = this.parseData(this.data);
@@ -21814,7 +21815,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             var width = svgWidth - margin.left - margin.right;
             var height = svgHeight - margin.top - margin.bottom;
 
-            var svg = __WEBPACK_IMPORTED_MODULE_0_d3__["i" /* select */]('svg.line-chart').attr("width", svgWidth).attr("height", svgHeight);
+            var svg = __WEBPACK_IMPORTED_MODULE_0_d3__["i" /* select */]('#' + this.svgid).attr("width", svgWidth).attr("height", svgHeight);
 
             var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -21881,7 +21882,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     created: function created() {
         var _this2 = this;
 
-        this.$bus.$on('slider-update', function (v1, v2) {
+        // console.log(this.id);
+        this.$bus.$on(this.svgid + '-slider-update', function (v1, v2) {
             var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             _this2.beginDate = new Date(months[v1] + ' 1, 2018');
             _this2.endDate = new Date(months[v2] + ' 1, 2018');
@@ -36294,7 +36296,7 @@ exports = module.exports = __webpack_require__(91)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -36315,6 +36317,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['id'],
     data: function data() {
         return {
             value1: 0,
@@ -36323,16 +36326,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        updateChart: function updateChart() {}
+        endDrag: function endDrag() {
+            var v = Object(__WEBPACK_IMPORTED_MODULE_1__slider_js__["b" /* endDrag */])();
+            console.log('my endDrag');
+            console.log(v);
+        }
     },
     mounted: function mounted() {
+        var _this = this;
+
         var sliderValues = [0, 11];
-        window.sliderValues = sliderValues;
+        window.sliderValues[this.id] = sliderValues;
         var width = 570;
-        var svg = __WEBPACK_IMPORTED_MODULE_0_d3__["i" /* select */]('div.slider-container').append('svg').attr('width', width + 30).attr('height', 50);
+        var svg = __WEBPACK_IMPORTED_MODULE_0_d3__["i" /* select */]('#' + this.id).append('svg').attr('width', width + 30).attr('height', 50);
         var x = __WEBPACK_IMPORTED_MODULE_0_d3__["g" /* scaleLinear */]().domain([0, 11]).range([0, width]).clamp(true);
 
-        window.x = x;
+        // window.x = x;
+        window.x[this.id] = x;
 
         var xMin = x(0); // sets left boundary of slider
         window.xMin = xMin;
@@ -36345,7 +36355,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         var selRange = slider.append('line').attr('class', 'sel-range').attr('x1', 10 + x(sliderValues[0])).attr('x2', 10 + x(sliderValues[1]));
 
-        window.selRange = selRange;
+        window.selRange[this.id] = selRange;
 
         var ticksArr = ["Jan '18", "Feb '18", "Mar '18", "Apr '18", "May '18", "Jun '18", "Jul '18", "Aug '18", "Sep '18", "Oct '18", "Nov '18", "Dec '18"];
 
@@ -36357,7 +36367,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return ticksArr[i];
         }); // sets text of each text
 
-        var handle = slider.selectAll('rect').data([0, 1]).enter().append('rect', '.track-overlay').attr('class', 'handle').attr('y', -8) // handles at -8 y position
+        var handle = slider.selectAll('rect').data([0, 1]).enter().append('rect', '.track-overlay').attr('class', 'handle').attr('id', function (d) {
+            return _this.id + '-handle-' + d;
+        }).attr('y', -8) // handles at -8 y position
         .attr('x', function (d) {
             return x(sliderValues[d]);
         }) // puts handles at value1 and value 2 x position
@@ -36386,43 +36398,65 @@ var ticksArr = [];
 
 var bus = window.bus;
 
-function setupSlider(value1, value2, updateGraph) {
-    sliderValues = [value1, value2];
-    var width = 570;
-    var svg = __WEBPACK_IMPORTED_MODULE_0_d3__["i" /* select */]('div.slider-container').append('svg').attr('width', width + 30).attr('height', 50);
-    x = __WEBPACK_IMPORTED_MODULE_0_d3__["g" /* scaleLinear */]().domain([0, 11]).range([0, width]).clamp(true);
-
-    xMin = x(0); // sets left boundary of slider
-    xMax = x(11); // sets right boundary of slider
-
-    var slider = svg.append('g').attr('class', 'slider').attr('transform', 'translate(5, 20)');
-
-    slider.append('line').attr('class', 'track').attr('x1', 10 + x.range()[0]).attr('x2', 10 + x.range()[1]);
-
-    selRange = slider.append('line').attr('class', 'sel-range').attr('x1', 10 + x(sliderValues[0])).attr('x2', 10 + x(sliderValues[1]));
-
-    ticksArr = ["Jan '18", "Feb '18", "Mar '18", "Apr '18", "May '18", "Jun '18", "Jul '18", "Aug '18", "Sep '18", "Oct '18", "Nov '18", "Dec '18"];
-
-    slider.insert('g', '.track-overlay') // appends ticks group
-    .attr('class', 'ticks').attr('transform', 'translate(10, 24)').selectAll('text').data(x.ticks(12)).enter().append('text').attr('x', x) // sets x position of each text
-    .attr('text-anchor', 'middle')
-    //.style('font-weight', 'bold')
-    .text(function (d, i) {
-        return ticksArr[i];
-    }); // sets text of each text
-
-    var handle = slider.selectAll('rect').data([0, 1]).enter().append('rect', '.track-overlay').attr('class', 'handle').attr('y', -8) // handles at -8 y position
-    .attr('x', function (d) {
-        return x(sliderValues[d]);
-    }) // puts handles at value1 and value 2 x position
-    .attr('rx', 3) // rounds corners of handles
-    .attr('height', 16).attr('width', 20).call(__WEBPACK_IMPORTED_MODULE_0_d3__["c" /* drag */]().on('start', startDrag).on('drag', drag).on('end', endDrag));
-    // console.log("Inside setupSlider");
-}
-
-function updateGraph(value1, value2) {
-    console.log("Updating graph...");
-}
+// function setupSlider(value1, value2, updateGraph) {
+//         sliderValues = [value1, value2];
+//     var  width = 570;
+//     var svg = d3.select('div.slider-container').append('svg')
+//                 .attr('width', width + 30)
+//                 .attr('height', 50);
+//     x = d3.scaleLinear().domain([0, 11]).range([0, width]).clamp(true);
+//
+//     xMin = x(0); // sets left boundary of slider
+//     xMax = x(11); // sets right boundary of slider
+//
+//     var slider = svg.append('g')
+//         .attr('class', 'slider')
+//         .attr('transform', 'translate(5, 20)');
+//
+//     slider.append('line')
+//         .attr('class', 'track')
+//         .attr('x1', 10 + x.range()[0])
+//         .attr('x2', 10 + x.range()[1]);
+//
+//     selRange = slider.append('line')
+//         .attr('class', 'sel-range')
+//         .attr('x1', 10 + x(sliderValues[0]))
+//         .attr('x2', 10 + x(sliderValues[1]));
+//
+//     ticksArr = ["Jan '18", "Feb '18", "Mar '18", "Apr '18", "May '18", "Jun '18", "Jul '18", "Aug '18", "Sep '18", "Oct '18", "Nov '18", "Dec '18"];
+//
+//     slider.insert('g', '.track-overlay') // appends ticks group
+//             .attr('class', 'ticks')
+//             .attr('transform', 'translate(10, 24)')
+//         .selectAll('text')
+//         .data(x.ticks(12))
+//         .enter().append('text')
+//             .attr('x', x) // sets x position of each text
+//             .attr('text-anchor', 'middle')
+//             //.style('font-weight', 'bold')
+//             .text(function(d, i) { return ticksArr[i];}); // sets text of each text
+//
+//     var handle = slider.selectAll('rect')
+//         .data([0, 1])
+//         .enter().append('rect', '.track-overlay')
+//             .attr('class', 'handle')
+//             .attr('y', -8) // handles at -8 y position
+//             .attr('x', function(d) { return x(sliderValues[d]); }) // puts handles at value1 and value 2 x position
+//             .attr('rx', 3) // rounds corners of handles
+//             .attr('height', 16)
+//             .attr('width', 20)
+//             .call(
+//                 d3.drag()
+//                     .on('start', startDrag)
+//                     .on('drag', drag)
+//                     .on('end', endDrag)
+//             );
+//     // console.log("Inside setupSlider");
+// }
+//
+// function updateGraph(value1, value2) {
+//     console.log("Updating graph...");
+// }
 
 function startDrag() {
     var bus = window.bus;
@@ -36442,45 +36476,57 @@ function drag(d) {
     } else if (x1 < window.xMin) {
         x1 = window.xMin;
     }
+
+    var id = __WEBPACK_IMPORTED_MODULE_0_d3__["i" /* select */](this).attr('id');
+    var index = id.lastIndexOf('-handle-');
+    var key = id.substring(0, index);
+    console.log(key);
+
     __WEBPACK_IMPORTED_MODULE_0_d3__["i" /* select */](this).attr("x", x1); //
-    var x2 = window.x(window.sliderValues[d == 0 ? 1 : 0]);
-    window.selRange.attr("x1", 10 + x1) // places handles inspect
+    var x2 = window.x[key](window.sliderValues[key][d == 0 ? 1 : 0]);
+
+    window.selRange[key].attr("x1", 10 + x1) // places handles inspect
     .attr("x2", 10 + x2);
+
     // console.log("Dragging!");
 }
 
 function endDrag(d) {
-    var v = Math.round(window.x.invert(__WEBPACK_IMPORTED_MODULE_0_d3__["d" /* event */].x));
-    // console.log(v);
     var elem = __WEBPACK_IMPORTED_MODULE_0_d3__["i" /* select */](this);
-    window.sliderValues[d] = v;
-    var v1 = Math.min(window.sliderValues[0], window.sliderValues[1]),
-        v2 = Math.max(window.sliderValues[0], window.sliderValues[1]);
+    var id = elem.attr('id');
+    var index = id.lastIndexOf('-handle-');
+    var key = id.substring(0, index);
 
-    h1 = v1;
-    h2 = v2;
+    var v = Math.round(window.x[key].invert(__WEBPACK_IMPORTED_MODULE_0_d3__["d" /* event */].x));
+    // console.log(this);
+    window.sliderValues[key][d] = v;
+    var v1 = Math.min(window.sliderValues[key][0], window.sliderValues[key][1]),
+        v2 = Math.max(window.sliderValues[key][0], window.sliderValues[key][1]);
+
+    // h1 = v1;
+    // h2 = v2;
 
     // console.log(v1 + " " + h1);
     // console.log(v2 + " " + h2);
 
-    elem.classed("active", false).attr("x", window.x(v));
+    elem.classed("active", false).attr("x", window.x[key](v));
 
-    window.selRange.attr("x1", 10 + window.x(v1)).attr("x2", 10 + window.x(v2));
+    window.selRange[key].attr("x1", 10 + window.x[key](v1)).attr("x2", 10 + window.x[key](v2));
 
-    window.bus.$emit('slider-update', v1, v2);
+    window.bus.$emit(key + '-update', v1, v2);
     // console.log("Ended dragging!");
     // updateGraph(v1, v2);
     // updatedGraph(v1, v2);
 }
 
-function updatedGraph(v1, v2) {
-    console.log("Value 1 is: " + v1 + " So min date is: " + ticksArr[v1]);
-    console.log("Value 2 is: " + v2 + " So max date is: " + ticksArr[v2]);
-    // var newDate = new Date(2018, v1)
-    console.log(new Date(2018, v1));
-    console.log(new Date(2018, v2));
-    // filterDate();
-}
+// function updatedGraph(v1, v2) {
+//     console.log("Value 1 is: " + v1 + " So min date is: " + ticksArr[v1]);
+//     console.log("Value 2 is: " + v2 + " So max date is: " + ticksArr[v2]);
+//     // var newDate = new Date(2018, v1)
+//     console.log(new Date(2018, v1));
+//     console.log(new Date(2018, v2));
+//     // filterDate();
+// }
 
 
 
@@ -36492,7 +36538,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "slider-container" })
+  return _c("div", { staticClass: "slider-container", attrs: { id: _vm.id } })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -36553,9 +36599,9 @@ var render = function() {
         })
       ),
       _vm._v(" "),
-      _c("slider"),
+      _c("slider", { attrs: { id: _vm.svgid + "-slider" } }),
       _vm._v(" "),
-      _c("svg", { staticClass: "line-chart" })
+      _c("svg", { staticClass: "line-chart", attrs: { id: _vm.svgid } })
     ],
     1
   )

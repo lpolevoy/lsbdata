@@ -12,8 +12,8 @@
     </head>
     <body>
         <h1>LSB Temperatures</h1>
-        <div id="first-type">
-            <h3> Type of Data to Display: </h3>
+        <!-- <div id="first-type"> -->
+            <!-- <h3> Type of Data to Display: </h3> -->
             <!-- <select id="types"></select> -->
 
     				<!-- <input id="typesinput" list="datatype">
@@ -21,12 +21,14 @@
     				<!-- <button id="select"> Select </button> -->
 
             <!-- <div class="slider-container"> -->
-            </div>
-        </div>
+            <!-- </div> -->
+        <!-- </div> -->
         <!-- <svg class="line-chart"></svg> -->
         <div id="app">
             <!-- <slider></slider> -->
-            <graph></graph>
+            <graph :svgid="'graph1'"></graph>
+            <graph :svgid="'graph2'"></graph>
+            <!-- <graph :id="'graph2'"></graph> -->
         </div>
 
         <!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->

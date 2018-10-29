@@ -3,8 +3,8 @@
         <select class="d-block" v-model="dataType" @change="updateChart">
             <option v-for="type in dataTypes" :value="type">{{ type.text }}</option>
         </select>
-        <slider></slider>
-        <svg class="line-chart"></svg>
+        <slider :id="svgid + '-slider'"></slider>
+        <svg :id="svgid" class="line-chart"></svg>
     </div>
 </template>
 
@@ -13,6 +13,7 @@
     import Slider from './Slider.vue'
 
     export default {
+        props: ['svgid'],
         data() {
             return {
                 // would actually be a prop data
@@ -50,11 +51,11 @@
         },
         computed: {
             filteredData() {
-                console.log('update data');
+                // console.log('update data');
                 // let range = [this.beginDate, this.endDate];
                 let arr = this.parseData(this.stTemps[this.dataType.value]);
 
-                console.log(window.xMin + " " + window.xMax);
+                // console.log(window.xMin + " " + window.xMax);
                 // return arr.filter(date => date.date.getMonth() >= window.x(0) && date.date.getMonth() <= window.x(1));
                 return arr.filter(date => date.date.getMonth() >= this.beginDate.getMonth() && date.date.getMonth() <= this.endDate.getMonth());
 
@@ -76,7 +77,7 @@
             },
             clearChart() {
                 // rather than by class, may be better to select by id and have id be a prop (for multiple graphs)
-                d3.select('svg.line-chart').selectAll('*').remove();
+                d3.select(`#${this.svgid}`).selectAll('*').remove();
             },
             drawChart() {
                 // let data = this.parseData(this.data);
@@ -87,7 +88,7 @@
                 var width = svgWidth - margin.left - margin.right;
                 var height = svgHeight - margin.top - margin.bottom;
 
-                var svg = d3.select('svg.line-chart')
+                var svg = d3.select(`#${this.svgid}`)
                     .attr("width", svgWidth)
                     .attr("height", svgHeight);
 
@@ -163,7 +164,8 @@
             this.drawChart();
         },
         created() {
-            this.$bus.$on('slider-update', (v1, v2) => {
+            // console.log(this.id);
+            this.$bus.$on(`${this.svgid}-slider-update`, (v1, v2) => {
                 let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
                 this.beginDate = new Date(`${months[v1]} 1, 2018`);
                 this.endDate = new Date(`${months[v2]} 1, 2018`);

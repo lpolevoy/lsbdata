@@ -2,9 +2,9 @@ import Vue from 'vue';
 import Graph from './components/Graph.vue';
 // import Slider from './components/Slider.vue';
 
-window.sliderValues = [];
-window.x = null;
-window.selRange = null;
+window.sliderValues = {};
+window.x = {}; //null;
+window.selRange = {}; //null;
 window.xMin = 0;
 window.xMax = 11;
 
