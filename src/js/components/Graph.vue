@@ -16,7 +16,7 @@
         props: ['svgid'],
         data() {
             return {
-                // would actually be a prop data
+                // would probably be best as prop data or stored elsewhere and read from there
                 stTemps: {
                     "celcius": {
                         "2018-01-01 00:00:00":1.040, "2018-01-02 00:00:00":0.705, "2018-01-03 00:00:00":0.044, "2018-01-04 00:00:00":0.290,"2018-01-05 00:00:00":0.204, "2018-01-06 00:00:00":0.942, "2018-01-07 00:00:00":0.560, "2018-01-08 00:00:00":0.969, "2018-01-09 00:00:00":1.042, "2018-01-10 00:00:00":6.502, "2018-01-11 00:00:00":3.002, "2018-01-12 00:00:00":3.230,
@@ -51,37 +51,28 @@
         },
         computed: {
             filteredData() {
-                // console.log('update data');
-                // let range = [this.beginDate, this.endDate];
-                let arr = this.parseData(this.stTemps[this.dataType.value]);
+                var arr = this.parseData(this.stTemps[this.dataType.value]);
 
-                // console.log(window.xMin + " " + window.xMax);
-                // return arr.filter(date => date.date.getMonth() >= window.x(0) && date.date.getMonth() <= window.x(1));
-                return arr.filter(date => date.date.getMonth() >= this.beginDate.getMonth() && date.date.getMonth() <= this.endDate.getMonth());
-
-                // return this.stTemps[this.dataType.value];
+                return arr.filter(date => date.date.getMonth() >= this.beginDate.getMonth() &&
+                    date.date.getMonth() <= this.endDate.getMonth());
             }
         },
         methods: {
             parseData(data) {
-                let arr = [];
-                for (let i in data) {
-                    // filter through stTemps and only push into arr needed data points (within slider date range)
-                    // console.log(new Date(i).getMonth());
+                var arr = [];
+                for (var i in data) {
                     arr.push({
-                        date: new Date(i), //date ('key')
+                        date: new Date(i), // date ('key')
                         value: data[i]
                     })
                 }
                 return arr;
             },
             clearChart() {
-                // rather than by class, may be better to select by id and have id be a prop (for multiple graphs)
                 d3.select(`#${this.svgid}`).selectAll('*').remove();
             },
             drawChart() {
-                // let data = this.parseData(this.data);
-                let data = this.filteredData;
+                var data = this.filteredData;
 
                 var svgWidth = 600, svgHeight = 400;
                 var margin = { top: 20, right: 20, bottom: 30, left: 50 };
@@ -164,9 +155,8 @@
             this.drawChart();
         },
         created() {
-            // console.log(this.id);
             this.$bus.$on('slider-update', (v1, v2) => {
-                let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+                var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
                 this.beginDate = new Date(`${months[v1]} 1, 2018`);
                 this.endDate = new Date(`${months[v2]} 1, 2018`);
                 this.clearChart();

@@ -1,0 +1,83 @@
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.line-chart {
+    background-color: #C7D9D9;
+    }
+
+.bar {
+     fill: #115D8C;
+     }
+/* .slider {
+    width: 600px;
+    height: 30px;
+}
+
+.ticks {
+  font-size: 5pt;
+}
+
+rect {
+  fill: rgb(255, 218, 185);
+}
+
+.track {
+  stroke: rgb(211,211,211);
+  stroke-width: 20px;
+
+}
+
+.sel-range {
+  stroke: rgba(255, 0, 0, 0.5);
+  stroke-width: 20px;
+} */
+
+.slider-holder{
+  width: 700px;
+}
+.ticks {
+  font: 5pt sans-serif;
+}
+
+.track,
+.track-inset,
+.track-overlay {
+  stroke-linecap: round;
+}
+
+.track {
+  stroke: rgb(211,211,211);
+  stroke-width: 10px;
+}
+
+.track-overlay {
+  pointer-events: stroke;
+  stroke-width: 10px;
+  cursor: crosshair;
+}
+
+.sel-range{
+  stroke: #9CCC65;
+  stroke-width: 8px;
+}
+
+.handle {
+  fill: rgb(255, 218, 185);
+  stroke: #000;
+  stroke-opacity: 0.5;
+  stroke-width: 1px;
+  cursor: pointer;
+}
+.handle:hover{
+	fill: #f9a777;
+}
+.handle.active {
+  fill: #ff833a;
+}

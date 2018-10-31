@@ -15,29 +15,30 @@
         },
         methods: {
             endDrag() {
-                let v = endDrag();
+                var v = endDrag();
                 console.log('my endDrag');
                 console.log(v);
             }
 
         },
         mounted() {
-            let sliderValues = [0, 11];
+            var sliderValues = [0, 11];
             // window.sliderValues[this.id] = sliderValues;
             window.sliderValues = sliderValues;
+
             var  width = 570;
             var svg = // d3.select(`#${this.id}`).append('svg')
             d3.select('div.slider-container').append('svg')
                 .attr('width', width + 30)
                 .attr('height', 50);
-            let x = d3.scaleLinear().domain([0, 11]).range([0, width]).clamp(true);
 
+            var x = d3.scaleLinear().domain([0, 11]).range([0, width]).clamp(true);
             window.x = x;
             // window.x[this.id] = x;
 
-            let xMin = x(0); // sets left boundary of slider
+            var xMin = x(0); // sets left boundary of slider
             window.xMin = xMin;
-            let xMax = x(11); // sets right boundary of slider
+            var xMax = x(11); // sets right boundary of slider
             window.xMax = xMax;
 
             var slider = svg.append('g')
@@ -49,19 +50,18 @@
                 .attr('x1', 10 + x.range()[0])
                 .attr('x2', 10 + x.range()[1]);
 
-            let selRange = slider.append('line')
+            var selRange = slider.append('line')
                 .attr('class', 'sel-range')
                 .attr('x1', 10 + x(sliderValues[0]))
                 .attr('x2', 10 + x(sliderValues[1]));
-
             // window.selRange[this.id] = selRange;
             window.selRange = selRange;
 
-            let ticksArr = ["Jan '18", "Feb '18", "Mar '18", "Apr '18", "May '18", "Jun '18", "Jul '18", "Aug '18", "Sep '18", "Oct '18", "Nov '18", "Dec '18"];
+            var ticksArr = ["Jan '18", "Feb '18", "Mar '18", "Apr '18", "May '18", "Jun '18", "Jul '18", "Aug '18", "Sep '18", "Oct '18", "Nov '18", "Dec '18"];
 
             slider.insert('g', '.track-overlay') // appends ticks group
-                    .attr('class', 'ticks')
-                    .attr('transform', 'translate(10, 24)')
+                .attr('class', 'ticks')
+                .attr('transform', 'translate(10, 24)')
                 .selectAll('text')
                 .data(x.ticks(12))
                 .enter().append('text')
@@ -91,5 +91,4 @@
 </script>
 
 <style>
-
 </style>
