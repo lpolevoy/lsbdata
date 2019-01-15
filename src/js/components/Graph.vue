@@ -8,8 +8,10 @@
     </div>
 </template>
 
+
 <script>
     import * as d3 from 'd3'; // can be more specific
+    import axios from 'axios';
     // import Slider from './Slider.vue'
 
     export default {
@@ -17,7 +19,7 @@
         data() {
             return {
                 // would probably be best as prop data or stored elsewhere and read from there
-                stTemps: {
+                weatherData: {
                     "celcius": {
                         "2018-01-01 00:00:00":1.040, "2018-01-02 00:00:00":0.705, "2018-01-03 00:00:00":0.044, "2018-01-04 00:00:00":0.290,"2018-01-05 00:00:00":0.204, "2018-01-06 00:00:00":0.942, "2018-01-07 00:00:00":0.560, "2018-01-08 00:00:00":0.969, "2018-01-09 00:00:00":1.042, "2018-01-10 00:00:00":6.502, "2018-01-11 00:00:00":3.002, "2018-01-12 00:00:00":3.230,
                         "2018-02-01 00:00:00":5.220, "2018-02-02 00:00:00":5.704, "2018-02-03 00:00:00":3.504, "2018-02-04 00:00:00":3.205,"2018-02-05 00:00:00":5.280, "2018-02-06 00:00:00":5.640, "2018-02-07 00:00:00":2.072, "2018-02-08 00:00:00":9.230, "2018-02-09 00:00:00":1.402, "2018-02-10 00:00:00":6.020, "2018-02-11 00:00:00":3.403, "2018-02-12 00:00:00":3.210,
@@ -33,25 +35,37 @@
                         "2018-12-01 00:00:00":5.154, "2018-12-02 00:00:00":5.250, "2018-12-03 00:00:00":6.127, "2018-12-04 00:00:00":5.720,"2018-12-05 00:00:00":6.320, "2018-12-06 00:00:00":5.506, "2018-12-07 00:00:00":5.252, "2018-12-08 00:00:00":5.158, "2018-12-09 00:00:00":4.897, "2018-12-10 00:00:00":4.353, "2018-12-11 00:00:00":3.947, "2018-12-12 00:00:00":3.240
                     },
                     "fahrenheit": {
+                        // "2018-01-02":4.00, "2018-01-03":0.00, "2018-01-04":3.00, "2018-01-05":6.00, "2018-01-07":4.64, "2018-01-07":3.25, "2018-01-08":2.42, "2018-01-09":1.15, "2018-01-10":1.57, "2018-01-11":1.27, "2018-01-12":2.0,
+                        // "2018-01-13":2.78, "2018-01-14":3.2, "2018-01-15":4.01, "2018-01-16":3.35, "2018-01-17":2.56, "2018-01-18":4.98, "2018-01-19":5.8,"2018-01-20":5.9, "2018-01-21":5.78, "2018-01-22":5.95, "2018-01-23":5.4,
+                        // "2018-01-24":4.83, "2018-01-25":4.15, "2018-01-26":4.44, "2018-01-27":3.9, "2018-01-28":3.33, "2018-01-29":2.789, "2018-01-30":2.99, "2018-01-31":3.79
+                    },
+                    "kelvins": {
                         "2018-01-02":4.00, "2018-01-03":0.00, "2018-01-04":3.00, "2018-01-05":6.00, "2018-01-07":4.64, "2018-01-07":3.25, "2018-01-08":2.42, "2018-01-09":1.15, "2018-01-10":1.57, "2018-01-11":1.27, "2018-01-12":2.0,
                         "2018-01-13":2.78, "2018-01-14":3.2, "2018-01-15":4.01, "2018-01-16":3.35, "2018-01-17":2.56, "2018-01-18":4.98, "2018-01-19":5.8,"2018-01-20":5.9, "2018-01-21":5.78, "2018-01-22":5.95, "2018-01-23":5.4,
                         "2018-01-24":4.83, "2018-01-25":4.15, "2018-01-26":4.44, "2018-01-27":3.9, "2018-01-28":3.33, "2018-01-29":2.789, "2018-01-30":2.99, "2018-01-31":3.79
+                    },
+                    "cloudiness": {
+                        // "2018-01-01 00:00:00": 92
+                    },
+                    "humidity": {
+                        // "2018-01-01 00:00:00": 12
                     }
                 },
-                beginDate: new Date("January 1, 2018"),
+                beginDate: new Date("January 1, 2018"), // maybe allow this to change, like be 1 year from current day
                 endDate: new Date("Dec 30, 2018"),
                 dataTypes: [
                     {text: "Temperature (\xB0C)", value: 'celcius'},
                     {text: "Temperature (\xB0F)", value: 'fahrenheit'},
-                    {text: 'Temperature (K)', value: 'kelvin'},
-                    {text: 'Humidity (%)', value: 'humidity'}
+                    {text: 'Temperature (K)', value: 'kelvins'},
+                    // {text: 'Humidity (%)', value: 'humidity'},
+                    {text: 'Cloudiness (%)', value: 'cloudiness'}
                 ],
                 dataType: {text: "Temperature (\xB0C)", value: 'celcius'}
             };
         },
         computed: {
             filteredData() {
-                var arr = this.parseData(this.stTemps[this.dataType.value]);
+                var arr = this.parseData(this.weatherData[this.dataType.value]);
 
                 return arr.filter(date => date.date.getMonth() >= this.beginDate.getMonth() &&
                     date.date.getMonth() <= this.endDate.getMonth());
@@ -66,6 +80,7 @@
                         value: data[i]
                     })
                 }
+                this.getWeather(); // retrieves weather data from online
                 return arr;
             },
             clearChart() {
@@ -108,19 +123,12 @@
                                             return months[i];
                                         })*/); // creates x-axis in newly created 'g' element
 
-                    // d3.selectAll('.tick').(function(d) {
-                    //     if (d == 6) {
-                    //         this.remove();
-                    //     }
-                    // });
-
-                    svg
-                        .append("g")
+                    svg.append("g")
                         .append("text")
                         // .text("January") // can be retrieved from data instead of being harcoded
                         .style("font-size", 10)
-                        .style("font-family", "sans-serif")
-                        .attr("transform", "translate(35," + (svgHeight - 15) + ")");
+                        .style("font-family", "sans-serif");
+                        // .attr("transform", "translate(35," + (svgHeight - 15) + ")");
 
                     // y-axis label
                     g.append("g")
@@ -133,8 +141,6 @@
                         .attr("text-anchor", "end") // aligns text at end of text tag
                         .text(this.dataType.text); // text inside text tag
 
-                    //svg.selectAll('tick')
-
                     // creates line connecting data points
                     g.append("path")
                         .datum(data)
@@ -145,6 +151,84 @@
                         .attr("stroke-width", 1.5)
                         .attr("x", 10)
                         .attr("d", line); // based on variable defined above, appends line for every data element
+            },
+            getWeather() {
+                console.log("In getWeather today");
+                // var request = new XMLHttpRequest();
+                // request.onload = function() {
+                //   console.log(this);
+                // } //this.processResults;
+                // request.open("GET", "http://api.openweathermap.org/data/2.5/forecast?q=Seattle,us&mode=JSON&appid=67d06c060934313bf5d60f3ae9365b59", true);
+                // request.send();
+
+                // For historical weather data
+                  // // converts begin and end date objects to UTC date then to unix timestamp
+                  // var startDateUTC = this.beginDate.toISOString();
+                  // startDateUTC = Date.parse(this.beginDate) / 1000;
+                  // //  console.log("start date: " + startDateUTC);
+                  // var endDateUTC = new Date("January 5 2018");
+                  // endDateUTC = endDateUTC.toISOString();
+                  // endDateUTC = Date.parse(endDateUTC) / 1000;
+                  // // console.log("end date: " + endDateUTC);
+                  //
+                  // // console.log("New date: " + new Date());
+
+                     // console.log('http://history.openweathermap.org/data/2.5/history/city?q=Seattle,US&type=hour&start=' + startDateUTC
+                     //  + '&end=' + endDateUTC + '&mode=JSON&appid=67d06c060934313bf5d60f3ae9365b59');
+
+                // 'http://api.openweathermap.org/data/2.5/forecast?q=Seattle,us&mode=JSON&appid=67d06c060934313bf5d60f3ae9365b59' // weather forecase data
+                axios.get('http://api.openweathermap.org/data/2.5/weather?q=Seattle,us&mode=JSON&appid=67d06c060934313bf5d60f3ae9365b59')
+                .then(result => {
+                  this.processResult(result.data);
+                  // console.log(result.data);
+                }).catch(error => {
+                  console.log(error)
+                });
+            },
+            processResult(result) {
+                console.log("In processResult");
+                // add into "cloudiness" part of weatherData an element:value pair for each set of cloudiness data on initial page load
+                var cloudiness = {},
+                    kelvins = {};
+                //  console.log(cloudiness); // should be empty array
+                //  console.log(this.dataType.value); // checks value of dataTypes
+                // console.log(result); // logs result of ajax request
+                // console.log("result clouds all: " + result.clouds.all);
+
+                // // convert date from unix to UTC
+                // var newDay = new Date(result.dt * 1000).toLocaleDateString("en-US");
+                // console.log("result day: " + newDay);
+                // var newTime = new Date(result.dt * 1000).toLocaleTimeString("en-US");
+
+                // console.log("result timestamp: " + result.dt*1000);
+
+                //initialize moment.js
+                var moment = require('moment');
+                moment().format();
+
+                var newDate = moment(result.dt*1000).format("YYYY-MM-DD HH:mm:ssZ");
+
+                cloudiness[newDate] = result.clouds.all; // single cloudiness data point
+                kelvins[newDate] = result.main.temp; // single temperature data point
+                console.log(newDate);
+                console.log(Math.round(result.main.temp));
+
+                // console.log(cloudiness);
+                console.log(kelvins);
+
+
+                // // iterates through data set, combs for cloudiness data
+                // for (var i = 0; i < result.list.length; i++) {
+                //     var newDate = result.list[i].dt_txt;
+                //     var newCloudiness = result.list[i].clouds.all;
+                //     cloudiness[newDate] = newCloudiness; // adds date-value pair into object
+                //     // rain[newDate] = newRain;
+                // }
+
+                this.weatherData.cloudiness = cloudiness;
+                this.weatherData.kelvins = kelvins;
+                // console.log(this.weatherData.cloudiness); // should print out all date-cloudiness pairs
+                // console.log(result.list);
             },
             updateChart() {
                 this.clearChart();
@@ -161,8 +245,11 @@
                 this.endDate = new Date(`${months[v2]} 1, 2018`);
                 this.clearChart();
                 this.drawChart();
+
             })
-        },
+
+
+        }
         // components: {
         //     Slider
         // }

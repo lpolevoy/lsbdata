@@ -1,6 +1,8 @@
 import Vue from 'vue';
+// import OptionMenus from './components/OptionMenus';
 import Graph from './components/Graph.vue';
 import Slider from './components/Slider.vue';
+
 
 // values for slider
 window.sliderValues = {};
